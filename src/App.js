@@ -3,9 +3,7 @@ import './App.css';
 import styled from 'styled-components';
 import Board from './components/board';
 import Dashboard from "./components/dashboard";
-import Banner from "./components/banner";
-import { areEqual, getValidNeighbours } from "./helpers";
-import { playerColors } from './helpers';
+import { areEqual, getValidNeighbours, APP_BACKGROUND_COLOR } from "./helpers";
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -15,7 +13,7 @@ const StyledApp = styled.div`
   align-items: center;
   align-content: center;
   position: relative;
-  background-color: snow;
+  background-color: ${APP_BACKGROUND_COLOR};
   font-family: Roboto, sans-serif;
   line-height: 1.5;
 `;
@@ -138,9 +136,8 @@ class App extends Component {
     const { currentPlayer, moves, board, winner } = this.state;
     return (
       <StyledApp className="App">
-        { winner ? <Banner textColor={playerColors[winner]} message={`Player ${ this.state.winner } WON!`} /> : null}
         <div>
-        { board.length && <Board board={board} handleClick={this.handleClick}/> }
+        { board.length && <Board board={board} handleClick={this.handleClick} winner={winner} /> }
         {
           <Dashboard currentPlayer={currentPlayer} moves={moves} restartGame={this.restartGame}/>
         }
