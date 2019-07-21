@@ -52,6 +52,7 @@ const Board = ({ board, handleClick, winner }) => {
     height={`${HEIGHT}px`}
     width={`${WIDTH}px`}
     onClick={(e) => {
+      e.preventDefault();
       const clickPosition = [e.clientX - canvas.current.offsetLeft, e.clientY - canvas.current.offsetTop]
       handleClick(getCurrentClickedCell(clickPosition));
     }}
