@@ -1,10 +1,17 @@
 import React  from 'react';
 import { drawGameBackground, clearCanvas, drawCellOutline, drawCellFill, drawWinner } from '../helpers';
+import { useWindowSize } from '@react-hook/window-size'
 
 const Board = ({ board, handleClick, winner }) => {
   const canvas = React.useRef(null);
-  const HEIGHT = 600;
-  const WIDTH = 600;
+  const [width] = useWindowSize(
+    360,
+    720,
+    {fps: 16}
+  )
+
+  const HEIGHT = width > 600 ? 600 : width * .9;
+  const WIDTH = width > 600 ? 600 : width * .9;
   const numberOfRows = board.length;
   const rowHeight = HEIGHT / numberOfRows;
   const numberOfColumns = board[0].length;
